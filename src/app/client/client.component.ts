@@ -9,7 +9,7 @@ import { CmApiService } from '../cm-api.service';
 })
 export class ClientComponent implements OnInit {
 
-	client: {} = {}
+	client: any = {}
 	clientid: string;
 
   constructor(private cmApiService: CmApiService, private route: ActivatedRoute) { }
@@ -26,4 +26,11 @@ export class ClientComponent implements OnInit {
   	});
   }
 
+  draftsChange(drafts)
+  {
+    console.log(drafts);
+    console.log(this.client.drafts);
+    this.client.drafts = drafts;
+    console.log(this.client.drafts);
+  }
 }

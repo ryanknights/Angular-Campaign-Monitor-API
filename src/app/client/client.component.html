@@ -6,7 +6,8 @@
 	<client-new-email 
 		[client]="client" 
 		[lists]="client?.subscriberLists" 
-		[templates]="templates"
+		[templates]="client?.templates"
 		[clientid]="clientid"
+		(newDrafts)="draftsChange($event)"
 	></client-new-email>
 </div>

@@ -116,20 +116,40 @@ router.post('/client/:clientid/newemail', (req, res) =>
 		FromName: req.body.fromname,
 		FromEmail: req.body.fromemail,
 		ReplyTo: req.body.replyto,
-		ListIDs: (Array.isArray(req.body.lists))? req.body.lists : [req.body.lists]
+		ListIDs: (Array.isArray(req.body.lists))? req.body.lists : [req.body.lists],
+		TemplateID: req.body.templateid,
+		TemplateContent: {
+		    Singlelines: [
+		      {
+		        Content: 'This is a heading',
+		        Href: 'http://example.com/'
+		      }
+		    ],
+		    Multilines: [
+		      {
+		        Content: '<p>This is example</p><p>multiline <a href="http://example.com">content</a>...</p>'
+		      }
+		    ]
+		  }
 	}
 
-	axios.post(`${API}/campaigns/${clientid}.json`, newEmail,
+	axios.post(`${API}/campaigns/${clientid}/fromtemplate.json`, newEmail,
 	{
 		auth: { username: '221dd596d86ee03ddaf6794db22b2d5d', password: '' }
 	})
 	.then(campaignid =>
 	{
-		return res.status(200).json({campaignid : campaignid});
+		return axios.get(`${API}/clients/${clientid}/drafts.json`,
+		{
+			auth: { username: '221dd596d86ee03ddaf6794db22b2d5d', password: '' }
+		});	
+	})
+	.then(drafts =>
+	{
+		return res.status(200).json({drafts : drafts.data});
 	})
 	.catch(error =>
-	{	
-		console.log(error);
+	{
 		return res.status(500).send('Something broke');
 	});
 });

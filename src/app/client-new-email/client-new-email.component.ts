@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
 
 import { CmApiService } from '../cm-api.service';
@@ -9,7 +9,6 @@ import { CmApiService } from '../cm-api.service';
   styleUrls: ['./client-new-email.component.css']
 })
 export class ClientNewEmailComponent implements OnInit {
-
 
 	@Input()
 	client: any;
@@ -23,12 +22,16 @@ export class ClientNewEmailComponent implements OnInit {
 	@Input()
 	clientid: string;
 
+  @Output()
+  newDrafts = new EventEmitter();
+
 	email: {} = {
 		name: '',
 		subject: '',
 		fromname: '',
 		fromemail: '',
-		replyto: ''
+		replyto: '',
+    templateid: ''
 	}
 
   constructor(private cmApiService: CmApiService) { }
@@ -45,6 +48,7 @@ export class ClientNewEmailComponent implements OnInit {
   	data.append('fromname', value.fromname);
   	data.append('fromemail', value.fromemail);
   	data.append('replyto', value.replyto);
+    data.append('templateid', value.templateid);
 
   	const selectedLists = this.getSelectedLists();
 
@@ -53,12 +57,10 @@ export class ClientNewEmailComponent implements OnInit {
   		data.append('lists', list.ListID);
   	});
 
-  	console.log(this.client);
-
   	this.cmApiService.newEmail(this.clientid, data)
   		.subscribe(data =>
   		{
-  			console.log(data);
+  			this.newDrafts.emit(data.drafts);
   		});
   }
 
