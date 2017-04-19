@@ -1,3 +1,19 @@
-<p>
-  clients works!
-</p>
+<div class="page-header">
+	<h1 class="mb-4">Clients</h1>
+</div>
+
+<div class="card" *ngFor="let client of clients">
+	<div class="card-header">
+		{{ client.Name }}
+	</div>
+	<div class="card-block">
+		<p class="card-text">
+			<strong>Company: </strong> {{ client.clientData.BasicDetails.CompanyName }}<br />
+			<strong>Country: </strong> {{ client.clientData.BasicDetails.Country }}<br />
+			<strong>TimeZone: </strong> {{ client.clientData.BasicDetails.TimeZone }}<br />
+		</p>
+		<a routerLink="/clients/{{ client.ClientID }}" class="btn btn-primary">Create Email</a>
+	</div>
+</div>
+
+

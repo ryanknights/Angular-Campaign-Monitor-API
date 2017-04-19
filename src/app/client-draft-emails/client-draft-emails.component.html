@@ -1,0 +1,35 @@
+<h2>Draft Emails</h2>
+<div *ngIf="emails">
+	<div *ngIf="emails.length > 0">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Name</th>
+					<th>Subject</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let email of emails;">
+					<td>
+						{{ email.DateCreated }}
+					</td>
+					<td>
+						{{ email.Name }}
+					</td>
+					<td>
+						{{ email.Subject}}
+					</td>
+					<td>
+						<form>
+							<button class="btn btn-primary" disabled>
+								Send Preview
+							</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

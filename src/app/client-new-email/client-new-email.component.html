@@ -1,0 +1,35 @@
+<h2>New Draft Email</h2>
+
+<form novalidate #f="ngForm" (ngSubmit)="onSubmit(f)">
+	<div class="form-group">
+		<label for="name">Campaign Name</label>
+		<input type="text" name="name" class="form-control" ngModel>
+	</div>
+	<div class="form-group">
+		<label for="subject">Subject</label>
+		<input type="text" name="subject" class="form-control" ngModel>
+	</div>	
+	<div class="form-group">
+		<label for="fromname">From Name</label>
+		<input type="text" name="fromname" class="form-control" ngModel>
+	</div>	
+	<div class="form-group">
+		<label for="fromemail">From Email</label>
+		<input type="text" name="fromemail" class="form-control" ngModel>
+	</div>	
+	<div class="form-group">
+		<label for="replyto">Reply To</label>
+		<input type="text" name="replyto" class="form-control" ngModel>
+	</div>
+	<div class="form-group">
+		<h5>Lists</h5>
+		<label class="checkbox-inline" *ngFor="let list of lists;">
+			<input type="checkbox" [checked]="list.selected" (change)="onListChange(list)"> {{ list.Name }}
+		</label>
+	</div>
+	<button type="submit" class="btn btn-primary btn-block">
+		Create Draft Email
+	</button>
+</form>
+
+{{ f.value | json }}

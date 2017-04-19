@@ -1,0 +1,12 @@
+<div class="page-header">
+	<h1 class="mb-4" *ngIf="client">Client: {{ client?.clientData?.BasicDetails?.CompanyName }}</h1>
+	<client-draft-emails 
+		[emails]="client?.drafts"
+	></client-draft-emails>
+	<client-new-email 
+		[client]="client" 
+		[lists]="client?.subscriberLists" 
+		[templates]="templates"
+		[clientid]="clientid"
+	></client-new-email>
+</div>
