@@ -17,15 +17,7 @@ export class ClientComponent implements OnInit {
   constructor(private cmApiService: CmApiService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-  	this.route.params.subscribe(params =>
-  	{
-  		this.clientid = params['clientid'];
-
-	  	this.cmApiService.getClient(this.clientid).subscribe(client =>
-	  	{
-	  		this.client = client;
-	  	});  	  		
-  	});
+  	this.client = this.route['snapshot']['data']['client'];
   }
 
   draftsChange(newDraft)

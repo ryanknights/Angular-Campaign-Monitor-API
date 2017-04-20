@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { CmApiService } from './cm-api.service';
 import { ClientsComponent } from './clients/clients.component';
 import { ClientComponent } from './client/client.component';
+import { ClientResolve } from './client/client.resolve';
 import { ClientDraftEmailsComponent } from './client-draft-emails/client-draft-emails.component';
 import { ClientNewEmailComponent } from './client-new-email/client-new-email.component';
 
@@ -25,7 +26,10 @@ const ROUTES = [
   },
   {
     path: 'clients/:clientid',
-    component: ClientComponent
+    component: ClientComponent,
+    resolve : {
+      client: ClientResolve
+    }
   }
 ];
 @NgModule({
@@ -43,7 +47,7 @@ const ROUTES = [
     HttpModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [CmApiService],
+  providers: [CmApiService, ClientResolve],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
