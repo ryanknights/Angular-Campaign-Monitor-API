@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CmApiService } from '../cm-api.service';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-client',
@@ -11,6 +12,7 @@ export class ClientComponent implements OnInit {
 
 	client: any = {}
 	clientid: string;
+  data: any;
 
   constructor(private cmApiService: CmApiService, private route: ActivatedRoute) { }
 
@@ -26,11 +28,8 @@ export class ClientComponent implements OnInit {
   	});
   }
 
-  draftsChange(drafts)
+  draftsChange(newDraft)
   {
-    console.log(drafts);
-    console.log(this.client.drafts);
-    this.client.drafts = drafts;
-    console.log(this.client.drafts);
+    this.client.drafts.unshift(newDraft);
   }
 }

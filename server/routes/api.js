@@ -139,14 +139,7 @@ router.post('/client/:clientid/newemail', (req, res) =>
 	})
 	.then(campaignid =>
 	{
-		return axios.get(`${API}/clients/${clientid}/drafts.json`,
-		{
-			auth: { username: '221dd596d86ee03ddaf6794db22b2d5d', password: '' }
-		});	
-	})
-	.then(drafts =>
-	{
-		return res.status(200).json({drafts : drafts.data});
+		return res.status(200).json({campaignid : campaignid.data});
 	})
 	.catch(error =>
 	{

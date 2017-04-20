@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CmApiService } from '../cm-api.service';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-clients',
@@ -7,12 +8,12 @@ import { CmApiService } from '../cm-api.service';
   styleUrls: ['./clients.component.css']
 })
 export class ClientsComponent implements OnInit {
-
+  
 	clients: any = [];
 
   constructor(private cmApiService: CmApiService) { }
 
-  ngOnInit() {
+  ngOnInit() { 
   	this.cmApiService.getClients().subscribe(clients =>
   	{
   		this.clients = clients;

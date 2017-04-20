@@ -23,7 +23,7 @@ export class ClientNewEmailComponent implements OnInit {
 	clientid: string;
 
   @Output()
-  newDrafts = new EventEmitter();
+  newDraftSubmitted = new EventEmitter();
 
 	email: {} = {
 		name: '',
@@ -60,7 +60,20 @@ export class ClientNewEmailComponent implements OnInit {
   	this.cmApiService.newEmail(this.clientid, data)
   		.subscribe(data =>
   		{
-  			this.newDrafts.emit(data.drafts);
+        const newDraft = 
+        {
+          CampaignID: data.campaignid,
+          Name: value.name,
+          Subject: value.subject,
+          FromName: value.fromname,
+          FromEmail: value.fromemail,
+          ReplyTo: value.replyto,
+          DateCreated: new Date(Date.now()).toLocaleString(),
+          PreviewURL : 'pending',
+          PreviewTextURL: 'pending'
+        };
+
+  			this.newDraftSubmitted.emit(newDraft);
   		});
   }
 
