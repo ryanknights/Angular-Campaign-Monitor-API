@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CmApiService } from '../cm-api.service';
-import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-client',
@@ -18,6 +17,7 @@ export class ClientComponent implements OnInit {
 
   ngOnInit() {
   	this.client = this.route['snapshot']['data']['client'];
+    this.clientid = this.client.clientData.BasicDetails.ClientID;
   }
 
   draftsChange(newDraft)

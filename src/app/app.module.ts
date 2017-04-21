@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { Http, HttpModule, RequestOptions, XHRBackend } from '@angular/http';
+import { HttpService } from './http.service';
 
 import { RouterModule } from '@angular/router';
 
@@ -47,7 +48,14 @@ const ROUTES = [
     HttpModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [CmApiService, ClientResolve],
+  providers: [
+    CmApiService, 
+    ClientResolve,
+    {
+      provide: Http,
+      useClass: HttpService
+    }
+   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

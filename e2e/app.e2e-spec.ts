@@ -1,10 +1,10 @@
-import { CmApiPage } from './app.po';
+import { Angular4Page } from './app.po';
 
-describe('cm-api App', function() {
-  let page: CmApiPage;
+describe('angular4 App', () => {
+  let page: Angular4Page;
 
   beforeEach(() => {
-    page = new CmApiPage();
+    page = new Angular4Page();
   });
 
   it('should display message saying app works', () => {

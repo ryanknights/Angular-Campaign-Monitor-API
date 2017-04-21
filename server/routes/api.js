@@ -10,6 +10,8 @@ router.get('/', (req, res) =>
 
 router.get('/clients', (req, res) =>
 {
+	//return res.status(401).send('Error message');
+
 	axios.get(`${API}/clients.json`,
 	{
 		auth: { username: '221dd596d86ee03ddaf6794db22b2d5d', password: '' }
